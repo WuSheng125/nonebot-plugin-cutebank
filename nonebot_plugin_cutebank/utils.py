@@ -1,7 +1,8 @@
 import random
 import json
 from pathlib import Path
-from typing import Tuple, List, Union, Dict
+from typing import Tuple, Union, Dict
+from fuzzywuzzy import process
 
 from .config import config
 
@@ -78,14 +79,12 @@ class Utils:
 
     async def get_chat_result(self, text: str, username: str) -> Union[str, None]:
         """从字典中返回结果"""
-        result: List[str] = []
         keys = self.anime_thesaurus.keys()
-        for key in keys:
-            if key in text:
-                result += self.anime_thesaurus[key]
-        if not result:
-            return f'{self.bot_nickname}听不懂哦~'
-        msg = random.choice(result).format(username=username, bot_nickname=self.bot_nickname)
+        res = process.extractOne(text, keys)
+        if res[1] > 70:
+            msg = random.choice(self.anime_thesaurus[res[0]]).format(username=username, bot_nickname=self.bot_nickname)
+        else:
+            msg = f'{self.bot_nickname}听不懂哦~'
 
         return msg
 
