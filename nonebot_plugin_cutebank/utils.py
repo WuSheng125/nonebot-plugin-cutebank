@@ -11,6 +11,7 @@ class Utils:
     def __init__(self) -> None:
         """初始化"""
         self.bot_nickname: str = next(iter(config.nickname), 'bot')
+        self.similarity: int = config.cutebank_similarity
         self.poke_reply: Tuple = (
             f"别戳了，{self.bot_nickname}怕疼QwQ",
             f"呜呜，再戳{self.bot_nickname}脸都要肿了",
@@ -81,7 +82,7 @@ class Utils:
         """从字典中返回结果"""
         keys = self.anime_thesaurus.keys()
         res = process.extractOne(text, keys)
-        if res[1] > 70:
+        if res[1] > self.similarity:
             msg = random.choice(self.anime_thesaurus[res[0]]).format(username=username, bot_nickname=self.bot_nickname)
         else:
             msg = f'{self.bot_nickname}听不懂哦~'

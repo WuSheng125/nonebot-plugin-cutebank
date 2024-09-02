@@ -27,14 +27,22 @@ _✨ NoneBot 插件简单描述 ✨_
 
 在 nonebot2 项目的`.env`文件中添加下表中的必填配置
 
-| 配置项 | 必填 | 默认值 | 说明 |
-|:-----:|:----:|:----:|:----:|
-| NICKNAME | 否 | bot | bot昵称 |
-| CUTEBANK_PATH | 否 | data.json | 词库路径 |
+|         配置项         | 必填 |    默认值    |   说明    |
+|:-------------------:|:--:|:---------:|:-------:|
+|      NICKNAME       | 否  |    bot    |  bot昵称  |
+|    CUTEBANK_PATH    | 否  | data.json |  词库路径   |
+| CUTEBANK_SIMILARITY | 否  |    70     | 匹配精确度阈值 |
 
 ## 🎉 使用
 ### 指令表
-| 指令 | 权限 | 需要@ | 范围 | 说明 |
-|:-----:|:----:|:----:|:----:|:----:|
-| 戳一戳bot | 群员 | 否 | 群聊 | 触发回复 |
-| @bot+想对bot说的话 | 群员 | 是 | 群聊 | 触发回复 |
+|      指令       | 权限 | 需要@ | 范围 |  说明  |
+|:-------------:|:--:|:---:|:--:|:----:|
+|    戳一戳bot     | 群员 |  否  | 群聊 | 触发回复 |
+| @bot+想对bot说的话 | 群员 |  是  | 群聊 | 触发回复 |
+
+## 💡 鸣谢
+### [nonebot-plugin-picstatus](https://github.com/lgc-NB2Dev/nonebot-plugin-picstatus)
+-模糊搜索代码参考
+### [nonebot_plugin_smart_reply](https://github.com/Special-Week/nonebot_plugin_smart_reply/)
+-响应逻辑代码参考
+

@@ -9,8 +9,7 @@ class ConfigModel(BaseModel):
     nickname: Set[str]
 
     cutebank_path: Path = Path(__file__).parent / "data.json"
-
-    pass
+    cutebank_similarity: int = 70
 
 
 config: ConfigModel = get_plugin_config(ConfigModel)
