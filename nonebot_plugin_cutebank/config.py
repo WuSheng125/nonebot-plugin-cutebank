@@ -10,6 +10,7 @@ class ConfigModel(BaseModel):
 
     cutebank_path: Path = Path(__file__).parent / "data.json"
     cutebank_similarity: int = 70
+    cutebank_limit: int = 5
 
 
 config: ConfigModel = get_plugin_config(ConfigModel)
