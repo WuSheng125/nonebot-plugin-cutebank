@@ -4,8 +4,7 @@ from typing import Union, Dict, Any
 from nonebot import require
 from nonebot.matcher import Matcher
 from nonebot.adapters.onebot.v11 import (
-    # Message,
-    MessageEvent,
+    GroupMessageEvent,
     MessageSegment,
     PokeNotifyEvent,
     PrivateMessageEvent,
@@ -30,8 +29,6 @@ def limit_all():
 def limit_all_run(user_id: str):
     global limit_all_data
     user_id = str(user_id)
-    num = None
-    tip = None
     if limit_num == 0:
         return None
     if user_id in limit_all_data.keys():
@@ -62,9 +59,6 @@ class KeyWordModule:
     @staticmethod
     async def poke_handle(matcher: Matcher, event: PokeNotifyEvent) -> None:
         """戳一戳回复, 私聊会报错, 暂时摸不着头脑"""
-        # 私聊信息直接结束处理
-        if isinstance(event, PrivateMessageEvent):
-            return
         # 回复频率限制
         limit_type = limit_all_run(str(event.group_id))
         if limit_type is True:
@@ -82,11 +76,8 @@ class KeyWordModule:
             await matcher.send(await utils.rand_poke())
 
     @staticmethod
-    async def regular_reply(matcher: Matcher, event: MessageEvent) -> None:
+    async def regular_reply(matcher: Matcher, event: GroupMessageEvent) -> None:
         """普通回复"""
-        # 私聊信息直接结束处理
-        if isinstance(event, PrivateMessageEvent):
-            return
         # 回复频率限制
         limit_type = limit_all_run(str(event.group_id))
         if limit_type is True:

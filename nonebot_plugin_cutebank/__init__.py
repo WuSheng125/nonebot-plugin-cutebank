@@ -1,9 +1,9 @@
 from nonebot.plugin import PluginMetadata
 from nonebot.plugin.on import on_message, on_notice
-from nonebot.rule import to_me
+from nonebot.rule import to_me, is_type
 
 from .config import ConfigModel
-from .keywordhandle import key_word_module
+from .keywordhandle import key_word_module, GroupMessageEvent
 
 
 __version__ = "0.1.0"
@@ -22,5 +22,5 @@ on_notice(rule=to_me(), block=False, handlers=[key_word_module.poke_handle])
 
 # 普通回复响应器, 优先级999, 条件: 艾特bot就触发
 on_message(
-    rule=to_me(), priority=999, block=False, handlers=[key_word_module.regular_reply]
+    rule=to_me() and is_type(GroupMessageEvent), priority=999, block=False, handlers=[key_word_module.regular_reply]
 )
